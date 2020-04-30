@@ -1,0 +1,192 @@
+<app-navbar></app-navbar>
+<br />
+<br />
+<h1>View Deficiencies</h1>
+<nav class="nav nav-tabs" role="tablist">
+    <a [routerLink]="['/dut/view']" (click)='toggleLevel1Tab()'role="tab" id="defs-tab-level1Defs" class="{{ level1Selected ? 'nav-item nav-link active': 'nav-item nav-link'}}">Level 1 Deficiencies</a>
+    <a [routerLink]="['/dut/view']" (click)='toggleLevel2Tab()' role="tab" id="defs-tab-level2Defs" class="{{ level2Selected ? 'nav-item nav-link active': 'nav-item nav-link'}}">Level 2 Deficiencies</a>
+    <a [routerLink]="['/dut/view']" (click)='toggleLevel3Tab()' role="tab" id="defs-tab-level3Defs" class="{{ level3Selected ? 'nav-item nav-link active': 'nav-item nav-link'}}">Level 3 Deficiencies</a>
+</nav>
+<div class="tab-content">
+    <div *ngIf='level1Selected'>
+        <div id="defs-tabpane-level1Defs" class="fade tab-pane active show">
+            <form [formGroup]="level1Form" (ngSubmit)="onSubmit(level1Form.value)">
+                <div class="form-group">
+                    <label class="form-label" for="formDeficiencyNumber">Number</label>
+                    <input type="number" id="formDeficiencyNumber" formControlName="number" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="formEngDesc">English Description</label>
+                    <input type="text" id="formEngDesc" formControlName="engDesc" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="formFreDesc">French Description</label>
+                    <input type="text" id="formFreDesc" formControlName="freDesc" class="form-control">
+                </div>
+                <div class="form-group">
+                    <div class="form-check">
+                        <input type="checkbox" id="formSelectable" formControlName="selectable" class="form-check-input">
+                        <label title="" for="formSelectable" class="form-check-label">Selectable?</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-check">
+                        <input type="checkbox" id="formCitable" formControlName="citable" class="form-check-input">
+                        <label title="" for="formCitable" class="form-check-label">Citable?</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="formSort">Sort Sequence</label>
+                    <input type="text" id="formSort" formControlName="sort" class="form-control">
+                </div>
+                <button type="submit" class="btn btn-primary">Add</button>
+            </form>
+            <br>
+            <div class="table-responsive-sm">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>English Description</th>
+                            <th>French Description</th>
+                            <th>Selectable</th>
+                            <th>Citable</th>
+                            <th>Sort Sequence</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let key of objectKeys(this.deficiencies['level1'])">
+                            <td>{{key}}</td>
+                            <td>{{this.deficiencies['level1'][key].engDesc}}</td>
+                            <td>{{this.deficiencies['level1'][key].freDesc}}</td>
+                            <td>{{this.deficiencies['level1'][key].selectable}}</td>
+                            <td>{{this.deficiencies['level1'][key].citable}}</td>
+                            <td>{{this.deficiencies['level1'][key].sort}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="level2Selected">
+        <div id="defs-tabpane-level2Defs" role="tabpanel" class="fade tab-pane active show">
+            <form class="">
+                <div class="form-group">
+                    <label class="form-label" for="formDeficiencyNumber">Number</label>
+                    <input type="number" id="formDeficiencyNumber" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="formEngDesc">English Description</label>
+                    <input type="text" id="formEngDesc" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="formFreDesc">French Description</label>
+                    <input type="text" id="formFreDesc" class="form-control">
+                </div>
+                <div class="form-group">
+                    <div class="form-check">
+                        <input type="checkbox" id="formSelectable" class="form-check-input">
+                        <label title="" for="formSelectable" class="form-check-label">Selectable?</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-check">
+                        <input type="checkbox" id="formCitable" class="form-check-input">
+                        <label title="" for="formCitable" class="form-check-label">Citable?</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="formSort">Sort Sequence</label>
+                    <input type="text" id="formSort" class="form-control" />
+                </div>
+                <button type="submit" class="btn btn-primary">Add</button>
+            </form>
+            <br>
+            <div class="table-responsive-sm">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>English Description</th>
+                            <th>French Description</th>
+                            <th>Selectable</th>
+                            <th>Citable</th>
+                            <th>Sort Sequence</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>2001</td>
+                            <td>Level 2 Def 1</td>
+                            <td>Level Deux Def 1</td>
+                            <td>0</td>
+                            <td>1</td>
+                            <td>2001</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="level3Selected">
+        <div id="defs-tabpane-level3Defs" class="fade tab-pane active show">
+            <form class="">
+                <div class="form-group">
+                    <label class="form-label" for="formDeficiencyNumber">Number</label>
+                    <input type="number" id="formDeficiencyNumber" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="formEngDesc">English Description</label>
+                    <input type="text" id="formEngDesc" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="formFreDesc">French Description</label>
+                    <input type="text" id="formFreDesc" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <div class="form-check">
+                        <input type="checkbox" id="formSelectable" class="form-check-input" />
+                        <label title="" for="formSelectable" class="form-check-label">Selectable?</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-check">
+                        <input type="checkbox" id="formCitable" class="form-check-input" />
+                        <label title="" for="formCitable" class="form-check-label">Citable?</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="formSort">Sort Sequence</label>
+                    <input type="text" id="formSort" class="form-control" />
+                </div>
+                <button type="submit" class="btn btn-primary">Add</button>
+            </form>
+        </div>
+        <br>
+        <div class="table-responsive-sm">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>English Description</th>
+                        <th>French Description</th>
+                        <th>Selectable</th>
+                        <th>Citable</th>
+                        <th>Sort Sequence</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>3001</td>
+                        <td>Level 3 Def 1</td>
+                        <td>Level Trois Def 1</td>
+                        <td>1</td>
+                        <td>0</td>
+                        <td>3001</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+        
